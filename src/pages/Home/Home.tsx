@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { BASE_URL } from "../../utils/api";
-
-interface Array {
-  price: number;
-  description: string;
-  title: string;
-  id: number;
-  publishedAt: number;
-  updatedAt: number;
-}
-
-type CatchError = {
-  error: string;
-};
+import SpecialOffersCall from "./SpecialOffersCall";
 
 function Home() {
-  return <div>Home</div>;
+  return (
+    <>
+      <h2>Home</h2>
+      <SpecialOffersCall />
+    </>
+  );
 }
 
 export default Home;
