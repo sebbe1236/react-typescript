@@ -1,7 +1,13 @@
 import React from "react";
+import ShirtsFetch from "./ShirtsFetch";
 
 function Products() {
-  return <div>Products</div>;
+  return (
+    <>
+      Products
+      <ShirtsFetch />
+    </>
+  );
 }
 
 export default Products;
