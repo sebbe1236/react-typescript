@@ -1,7 +1,6 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
 import { BASE_URL } from "../../utils/api";
+import axios from "axios";
 import ProductsData from "./ProductsData";
 
 interface Array {
@@ -14,22 +13,21 @@ interface Array {
   attributes: any;
 }
 
-function ShirtsFetch() {
-  const [shirts, setShirts] = useState<Array[]>([]);
+function ShoesFetch() {
+  const [shoes, setShoes] = useState<Array[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const url = BASE_URL + "shirts?populate=*";
+  const url = BASE_URL + "shoes?populate=*";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
-        const json = await response.json();
-        console.log(json);
-        setShirts(json.data);
+        const response = await axios.get(url);
+        console.log(response.data.data);
+        setShoes(response.data.data);
       } catch (error: any) {
-        console.log(error);
+        console.log(error.message);
         setError(error.toString());
       } finally {
         setLoading(false);
@@ -39,18 +37,17 @@ function ShirtsFetch() {
   }, []);
 
   if (loading) {
-    return <p>Loading.....</p>;
+    return <p>Loading....</p>;
   }
   if (error) {
-    return <p>404 error</p>;
+    return <p>error</p>;
   }
-
   return (
     <>
-      <h3 className="text-center">Shirts</h3>
-      <ProductsData content={shirts} />
+      <h3 className="text-center">Shoes</h3>
+      <ProductsData content={shoes} />
     </>
   );
 }
 
-export default ShirtsFetch;
+export default ShoesFetch;

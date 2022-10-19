@@ -7,6 +7,9 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./components/layout/NavBar";
 import ContactForm from "./pages/Contact/ContactForm";
+import SingleProduct from "./pages/Singleproduct/SingleProduct";
+import SingleShoe from "./pages/Singleproduct/SingleShoe";
+import SingleShirt from "./pages/Singleproduct/SingleShirt";
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<ContactForm />} />
+        <Route path="/singleproduct/:id" element={<SingleProduct />} />
+        <Route path="/shoes/:id" element={<SingleShoe />} />
+        <Route path="/shirts/:id" element={<SingleShirt />} />
       </Routes>
     </BrowserRouter>
   );
