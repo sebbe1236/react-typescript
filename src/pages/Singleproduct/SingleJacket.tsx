@@ -1,45 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
 import { BASE_URL } from "../../utils/api";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import SingleProductData from "./SingleProductData";
 
-function SingleShoe() {
-  const [singleShoe, setSingleShoe] = useState([]);
+function SingleJacket() {
+  const [singleJacket, setSingleJacket] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const { id } = useParams();
 
-  const url = BASE_URL + `shoes/${id}?populate=*`;
+  const url = BASE_URL + `jackets/${id}?populate=*`;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(url);
         console.log(response.data.data);
-        setSingleShoe(response.data.data);
-      } catch (err: any) {
-        console.log(err);
-        setError(err.toString());
+        setSingleJacket(response.data.data);
+      } catch (error: any) {
+        setError(error.toString());
       } finally {
         setLoading(false);
       }
     };
     fetchData();
   }, []);
+
   if (loading) {
-    return <p>loading...</p>;
+    return <p>Loading....</p>;
   }
   if (error) {
-    return <p>ups</p>;
+    return <p>something odd happened</p>;
   }
 
   return (
     <>
-      <SingleProductData content={singleShoe} />
+      <SingleProductData content={singleJacket} />
     </>
   );
 }
 
-export default SingleShoe;
+export default SingleJacket;

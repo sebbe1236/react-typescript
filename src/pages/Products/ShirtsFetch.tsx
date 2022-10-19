@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+
 import { BASE_URL } from "../../utils/api";
 import ProductsData from "./ProductsData";
+import { Col, Container, Row, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 interface Array {
   price: number;
@@ -26,7 +28,7 @@ function ShirtsFetch() {
       try {
         const response = await fetch(url);
         const json = await response.json();
-        console.log(json);
+        console.log(json.data);
         setShirts(json.data);
       } catch (error: any) {
         console.log(error);
@@ -48,7 +50,24 @@ function ShirtsFetch() {
   return (
     <>
       <h3 className="text-center">Shirts</h3>
-      <ProductsData content={shirts} />
+      <Container>
+        <Row md={3} lg={6}>
+          {shirts.map((product) => {
+            return (
+              <Col key={product.id}>
+                <h4>{product.attributes.title}</h4>
+                <img
+                  className="w-100 h-50"
+                  src={`http://localhost:1337${product.attributes.image.data.attributes.url}`}
+                  alt="test"
+                />
+                <Link to={`/shirt/${product.id}`}>View</Link>
+                <Button className="p-3 m-3">Add to cart</Button>
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
     </>
   );
 }

@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../utils/api";
 import axios from "axios";
 import ProductsData from "./ProductsData";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 interface Array {
   price: number;
   description: string;
   title: string;
-  id: number;
+  id?: number;
   publishedAt: number;
   updatedAt: number;
   attributes: any;
@@ -45,7 +47,24 @@ function JacketFetch() {
   return (
     <>
       <h3 className="text-center">Jackets</h3>
-      <ProductsData content={jackets} />
+      <Container>
+        <Row md={3} lg={6}>
+          {jackets.map((product) => {
+            return (
+              <Col key={product.id}>
+                <h4 key={product.id}>{product.attributes.title}</h4>
+                <img
+                  className="w-100 h-50"
+                  src={`http://localhost:1337${product.attributes.image.data.attributes.url}`}
+                  alt="test"
+                />
+                <Link to={`/jacket/${product.id}`}>View</Link>
+                <Button className="p-3 m-3">Add to cart</Button>
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
     </>
   );
 }

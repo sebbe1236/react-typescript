@@ -26,7 +26,7 @@ function ProductsData({ content }: Data) {
                   src={`http://localhost:1337${product.attributes.image.data.attributes.url}`}
                   alt="test"
                 />
-                <Link to={`/singleproduct/${product.id}`}>view</Link>
+
                 <Button className="p-3 m-3" id={product.id}>
                   Add to cart
                 </Button>

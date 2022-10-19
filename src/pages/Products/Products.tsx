@@ -8,8 +8,8 @@ function Products() {
   return (
     <>
       <Heading>Products</Heading>
-      <ShirtsFetch />
       <JacketFetch />
+      <ShirtsFetch />
       <ShoesFetch />
     </>
   );
