@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import Heading from "../../components/layout/Heading";
 import { BASE_URL } from "../../utils/api";
+
+type FormData = {
+  title: string;
+  description: string;
+  email: string;
+};
 
 function ContactForm() {
   const [submit, setSubmit] = useState(false);
   const [error, setError] = useState(null);
+  const [successfulSubmit, setSuccessful] = useState(false);
 
   const url = BASE_URL + "contacts";
 
@@ -13,7 +21,7 @@ function ContactForm() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm<FormData>();
 
   const onSubmit = async (data: any) => {
     setSubmit(true);
@@ -39,6 +47,7 @@ function ContactForm() {
       const response = await fetch(url, options);
       const result = await response.json();
       console.log(result);
+      setSuccessful(result);
       reset();
     } catch (error: any) {
       setError(error.toString());
@@ -47,6 +56,7 @@ function ContactForm() {
 
   return (
     <>
+      <Heading>Contact form</Heading>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
@@ -81,6 +91,8 @@ function ContactForm() {
             {submit ? "sending" : "submit"}
           </button>
         </form>
+        {error && <div>form couldn't`t be sent.</div>}
+        {successfulSubmit && <div>Your form has been sent. We will get back to you shortly. </div>}
       </div>
     </>
   );
