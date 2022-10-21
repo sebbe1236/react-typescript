@@ -10,7 +10,7 @@ interface Array {
   price: number;
   description: string;
   title: string;
-  id: number;
+  id?: string;
   publishedAt: number;
   updatedAt: number;
   attributes: any;
@@ -62,7 +62,9 @@ function ShirtsFetch() {
                   alt="test"
                 />
                 <Link to={`/shirt/${product.id}`}>View</Link>
-                <Button className="p-3 m-3">Add to cart</Button>
+                <Button className="p-3 m-3" id={product.id}>
+                  Add to cart
+                </Button>
               </Col>
             );
           })}
