@@ -4,6 +4,7 @@ import axios from "axios";
 import ProductsData from "./ProductsData";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useShoppingCart } from "../../components/context/CartContext";
 
 interface Array {
   price: number;
@@ -15,10 +16,17 @@ interface Array {
   attributes: any;
 }
 
-function JacketFetch() {
+/**
+ *
+ * Kommet til 40:50https://www.youtube.com/watch?v=lATafp15HWA&t=2177s&ab_channel=WebDevSimplified
+ *
+ */
+
+export function JacketFetch({ id }: { id?: any }) {
   const [jackets, setJackets] = useState<Array[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { getItemQuantity, decreaseCartQuantity, increaseCartQuantity, removeFromCart } = useShoppingCart();
 
   const url = BASE_URL + "jackets?populate=*";
 
@@ -44,6 +52,9 @@ function JacketFetch() {
   if (error) {
     return <p>Something went wrong</p>;
   }
+
+  const quanity: number = getItemQuantity(id);
+
   return (
     <>
       <h3 className="text-center">Jackets</h3>
@@ -59,9 +70,19 @@ function JacketFetch() {
                   alt="test"
                 />
                 <Link to={`/jacket/${product.id}`}>View</Link>
-                <Button className="p-3 m-3" id={product.id}>
-                  Add to cart
-                </Button>
+
+                {quanity === 0 ? (
+                  <Button className="p-3 m-3" id={product.id} onClick={() => increaseCartQuantity(id)}>
+                    Add to cart
+                  </Button>
+                ) : (
+                  <div>
+                    <Button>-</Button>
+                    <span>{quanity} in cart</span>
+                    <Button>+</Button>
+                    <Button variant="danger">Remove</Button>
+                  </div>
+                )}
               </Col>
             );
           })}

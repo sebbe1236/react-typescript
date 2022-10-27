@@ -26,7 +26,7 @@ function ShoesFetch() {
     const fetchData = async () => {
       try {
         const response = await axios.get(url);
-        console.log(response.data.data);
+
         setShoes(response.data.data);
       } catch (error: any) {
         console.log(error.message);
@@ -44,6 +44,7 @@ function ShoesFetch() {
   if (error) {
     return <p>error</p>;
   }
+  const quanity = 0;
   return (
     <>
       <h3 className="text-center">Shoes</h3>
@@ -59,9 +60,17 @@ function ShoesFetch() {
                   alt="test"
                 />
                 <Link to={`/shoe/${product.id}`}>View</Link>
-                <Button className="p-3 m-3" id={product.id}>
-                  Add to cart
-                </Button>
+                {quanity === 0 ? (
+                  <Button className="p-3 m-3" id={product.id}>
+                    Add to cart
+                  </Button>
+                ) : (
+                  <div>
+                    <Button>-</Button>
+                    <span>{quanity} in cart</span>
+                    <Button>+</Button>
+                  </div>
+                )}
               </Col>
             );
           })}

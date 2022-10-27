@@ -28,7 +28,7 @@ function ShirtsFetch() {
       try {
         const response = await fetch(url);
         const json = await response.json();
-        console.log(json.data);
+
         setShirts(json.data);
       } catch (error: any) {
         console.log(error);
@@ -46,7 +46,7 @@ function ShirtsFetch() {
   if (error) {
     return <p>404 error</p>;
   }
-
+  const quanity = 0;
   return (
     <>
       <h3 className="text-center">Shirts</h3>
@@ -62,9 +62,17 @@ function ShirtsFetch() {
                   alt="test"
                 />
                 <Link to={`/shirt/${product.id}`}>View</Link>
-                <Button className="p-3 m-3" id={product.id}>
-                  Add to cart
-                </Button>
+                {quanity === 0 ? (
+                  <Button className="p-3 m-3" id={product.id}>
+                    Add to cart
+                  </Button>
+                ) : (
+                  <div>
+                    <Button>-</Button>
+                    <span>{quanity} in cart</span>
+                    <Button>+</Button>
+                  </div>
+                )}
               </Col>
             );
           })}

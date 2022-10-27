@@ -58,10 +58,10 @@ function ContactForm() {
     <>
       <Heading>Contact form</Heading>
       <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="form_container" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label>Title</label>
-            <input type="text" {...register("title", { required: true, minLength: 3 })} placeholder="name" />
+            <input type="text" {...register("title", { required: true, minLength: 3 })} placeholder="Title" />
             {errors.title && <div>Name must be over 3 letters</div>}
           </div>
 

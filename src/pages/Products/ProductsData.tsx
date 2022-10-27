@@ -2,10 +2,6 @@ import React from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-/**
- * Må map`e i hver api call for å få singleParams til å funke fordi link/product.id henter begge med id 5 for eksempel i singlefetchn
- * så må matte over i api calln så sette opp egen route med link der som /singlejacket/:id for eksempel.
- */
 interface Data {
   title?: string;
   image?: HTMLImageElement;

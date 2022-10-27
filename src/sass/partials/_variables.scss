@@ -1,0 +1,11 @@
+//typography
+$label-font-weight: bold;
+
+@mixin form-alignment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@mixin form_typography {
+  font-weight: $form-label;
+}

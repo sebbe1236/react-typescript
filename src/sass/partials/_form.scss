@@ -1,0 +1,15 @@
+@import "variables";
+
+.form_container {
+  @include form-alignment;
+}
+
+.form_container label {
+  font-weight: $label-font-weight;
+  @include form-alignment;
+}
+
+.form_container textarea {
+  width: 100%;
+  height: 300px;
+}
