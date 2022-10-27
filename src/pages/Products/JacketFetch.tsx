@@ -77,10 +77,12 @@ export function JacketFetch({ id }: { id?: any }) {
                   </Button>
                 ) : (
                   <div>
-                    <Button>-</Button>
+                    <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
                     <span>{quanity} in cart</span>
-                    <Button>+</Button>
-                    <Button variant="danger">Remove</Button>
+                    <Button onClick={() => increaseCartQuantity(id)}>+</Button>
+                    <Button variant="danger" onClick={() => removeFromCart(id)}>
+                      Remove
+                    </Button>
                   </div>
                 )}
               </Col>
