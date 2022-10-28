@@ -18,7 +18,7 @@ interface Array {
 
 /**
  *
- * Kommet til 40:50https://www.youtube.com/watch?v=lATafp15HWA&t=2177s&ab_channel=WebDevSimplified
+ * Kommet til 41:57https://www.youtube.com/watch?v=lATafp15HWA&t=2177s&ab_channel=WebDevSimplified
  *
  */
 
