@@ -6,6 +6,7 @@ interface Data {
   title?: string;
   image?: HTMLImageElement;
   content?: any;
+  id?: number;
 }
 
 function ProductsData({ content }: Data) {

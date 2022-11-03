@@ -4,28 +4,26 @@ import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CartProvider } from "react-use-cart";
 import NavBar from "./components/layout/NavBar";
 import ContactForm from "./pages/Contact/ContactForm";
-import SingleShoe from "./pages/Singleproduct/SingleShoe";
-import SingleShirt from "./pages/Singleproduct/SingleShirt";
+import Cart from "./pages/Cart/Cart";
 import SingleJacket from "./pages/Singleproduct/SingleJacket";
-import CartContext from "./components/context/CartContext";
 
 function App() {
   return (
-    <CartContext>
+    <CartProvider>
       <BrowserRouter>
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/contact" element={<ContactForm />} />
-          <Route path="/shoe/:id" element={<SingleShoe />} />
-          <Route path="/shirt/:id" element={<SingleShirt />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/jacket/:id" element={<SingleJacket />} />
         </Routes>
       </BrowserRouter>
-    </CartContext>
+    </CartProvider>
   );
 }
 

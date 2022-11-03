@@ -2,11 +2,21 @@ import React, { useEffect } from "react";
 import { BASE_URL } from "../../utils/api";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { Button, Container } from "react-bootstrap";
 import axios from "axios";
 import SingleProductData from "./SingleProductData";
+import { CartProvider, useCart } from "react-use-cart";
+interface Data {
+  title?: string;
+  image?: HTMLImageElement;
+  description?: string;
+  content?: any;
+  attributes?: any;
+  id?: string;
+}
 
 function SingleJacket() {
-  const [singleJacket, setSingleJacket] = useState([]);
+  const [singleJacket, setSingleJacket] = useState([] as any[]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -37,9 +47,9 @@ function SingleJacket() {
   }
 
   return (
-    <>
+    <Container>
       <SingleProductData content={singleJacket} />
-    </>
+    </Container>
   );
 }
 

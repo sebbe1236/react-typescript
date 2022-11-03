@@ -10,9 +10,9 @@ type FormData = {
 };
 
 function ContactForm() {
-  const [submit, setSubmit] = useState(false);
-  const [error, setError] = useState(null);
-  const [successfulSubmit, setSuccessful] = useState(false);
+  const [submit, setSubmit] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [successfulSubmit, setSuccessful] = useState<boolean>(false);
 
   const url = BASE_URL + "contacts";
 

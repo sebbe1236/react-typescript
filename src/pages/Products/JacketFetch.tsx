@@ -1,32 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../utils/api";
 import axios from "axios";
-import ProductsData from "./ProductsData";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useShoppingCart } from "../../components/context/CartContext";
 
 interface Array {
   price: number;
   description: string;
   title: string;
-  id?: string;
+  id: any;
   publishedAt: number;
   updatedAt: number;
   attributes: any;
 }
 
-/**
- *
- * Kommet til 41:57https://www.youtube.com/watch?v=lATafp15HWA&t=2177s&ab_channel=WebDevSimplified
- *
- */
-
-export function JacketFetch({ id }: { id?: any }) {
+export function JacketFetch() {
   const [jackets, setJackets] = useState<Array[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { getItemQuantity, decreaseCartQuantity, increaseCartQuantity, removeFromCart } = useShoppingCart();
 
   const url = BASE_URL + "jackets?populate=*";
 
@@ -53,8 +44,6 @@ export function JacketFetch({ id }: { id?: any }) {
     return <p>Something went wrong</p>;
   }
 
-  const quanity: number = getItemQuantity(id);
-
   return (
     <>
       <h3 className="text-center">Jackets</h3>
@@ -63,28 +52,14 @@ export function JacketFetch({ id }: { id?: any }) {
           {jackets.map((product) => {
             return (
               <Col key={product.id}>
-                <h4 key={product.id}>{product.attributes.title}</h4>
+                <h4>{product.attributes.title}</h4>
                 <img
                   className="w-100 h-50"
                   src={`http://localhost:1337${product.attributes.image.data.attributes.url}`}
                   alt="test"
                 />
                 <Link to={`/jacket/${product.id}`}>View</Link>
-
-                {quanity === 0 ? (
-                  <Button className="p-3 m-3" id={product.id} onClick={() => increaseCartQuantity(id)}>
-                    Add to cart
-                  </Button>
-                ) : (
-                  <div>
-                    <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
-                    <span>{quanity} in cart</span>
-                    <Button onClick={() => increaseCartQuantity(id)}>+</Button>
-                    <Button variant="danger" onClick={() => removeFromCart(id)}>
-                      Remove
-                    </Button>
-                  </div>
-                )}
+                <Button>Add to cart</Button>
               </Col>
             );
           })}
