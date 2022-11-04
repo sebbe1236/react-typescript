@@ -9,6 +9,12 @@ type FormData = {
   email: string;
 };
 
+type dataPropsOnSubmit = {
+  title: string;
+  description: string;
+  email: string;
+};
+
 function ContactForm() {
   const [submit, setSubmit] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +29,7 @@ function ContactForm() {
     reset,
   } = useForm<FormData>();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: dataPropsOnSubmit) => {
     setSubmit(true);
     setError(null);
 

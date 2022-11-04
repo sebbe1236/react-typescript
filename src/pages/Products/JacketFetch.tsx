@@ -18,6 +18,7 @@ export function JacketFetch() {
   const [jackets, setJackets] = useState<Array[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  //const [cartItems, setCartItems] = useState([]);
 
   const url = BASE_URL + "jackets?populate=*";
 
@@ -43,6 +44,13 @@ export function JacketFetch() {
   if (error) {
     return <p>Something went wrong</p>;
   }
+
+  // const onAdd = (product: any) => {
+
+  //   }
+  // };
+
+  // const onRemove = (product: any) => {};
 
   return (
     <>
