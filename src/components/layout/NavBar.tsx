@@ -3,8 +3,27 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
+import Context, { useAuth } from "../context/Context";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
+  const [auth, setAuth] = useAuth();
+
+  const navigate = useNavigate();
+
+  function logout() {
+    const confirmLogout = window.confirm("are you sure that you want to log out?");
+
+    if (confirmLogout) {
+      try {
+        localStorage.clear();
+        navigate("/");
+      } catch (error) {
+        console.log("error");
+      }
+    }
+  }
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -16,6 +35,20 @@ function NavBar() {
             <Nav.Link href="/products">Products</Nav.Link>
             <Nav.Link href="/contact">Contact</Nav.Link>
           </Nav>
+          <Nav.Link href="/signup">
+            <Button className="p-2 m-2">Sign up</Button>
+          </Nav.Link>
+          {auth ? (
+            <>
+              <Button onClick={logout}></Button>
+            </>
+          ) : (
+            <>
+              <Nav.Link href="/login">
+                <Button className="p-2 m-2">Sign in</Button>
+              </Nav.Link>
+            </>
+          )}
           <Nav.Link href="/cart">
             {" "}
             <Button style={{ width: "3rem", height: "3rem", position: "relative" }} variant="outline-primary">
