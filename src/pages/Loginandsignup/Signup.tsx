@@ -25,8 +25,6 @@ function Signup() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  //const [auth, setAuth] = useAuth(); const [auth, setAuth] = useAuth(); element is not a array type error message
-
   const {
     register,
     handleSubmit,
@@ -44,8 +42,8 @@ function Signup() {
         email: data.email,
       });
       console.log(response.data);
-      console.log(response.data.jwt);
 
+      setSuccess(response.data);
       reset();
     } catch (error: any) {
       console.log(error);
@@ -79,6 +77,8 @@ function Signup() {
           Submit
         </Button>
       </Form>
+      {success && <div>User created. Please go to the sign in page to log in.</div>}
+      {error && <div>Some error occured</div>}
     </>
   );
 }

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -16,7 +17,7 @@ function NavBar() {
 
     if (confirmLogout) {
       try {
-        localStorage.clear();
+        setAuth(null);
         navigate("/");
       } catch (error) {
         console.log("error");
@@ -40,7 +41,7 @@ function NavBar() {
           </Nav.Link>
           {auth ? (
             <>
-              <Button onClick={logout}></Button>
+              <Button onClick={logout}>Log out</Button>
             </>
           ) : (
             <>
