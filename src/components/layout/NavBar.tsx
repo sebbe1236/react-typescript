@@ -41,12 +41,16 @@ function NavBar() {
           </Nav.Link>
           {auth ? (
             <>
-              <Button onClick={logout}>Log out</Button>
+              <Button onClick={logout} variant="danger">
+                Log out
+              </Button>
             </>
           ) : (
             <>
               <Nav.Link href="/login">
-                <Button className="p-2 m-2">Sign in</Button>
+                <Button className="p-2 m-2" variant="success">
+                  Sign in
+                </Button>
               </Nav.Link>
             </>
           )}

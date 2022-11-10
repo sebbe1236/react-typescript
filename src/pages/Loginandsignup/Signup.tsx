@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useForm } from "react-hook-form";
 import { BASE_URL } from "../../utils/api";
-import useAuth from "../../components/context/Context";
 
 type signupProps = {
   username: string;
@@ -21,9 +20,9 @@ type FormValues = {
 const url = BASE_URL + "auth/local/register";
 
 function Signup() {
-  const [signup, setSignUp] = useState(false);
+  const [signingUp, setSignUp] = useState<boolean>(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState<boolean>(false);
 
   const {
     register,
@@ -74,7 +73,7 @@ function Signup() {
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          Submit
+          {signingUp ? "Loading" : "Sign up"}
         </Button>
       </Form>
       {success && <div>User created. Please go to the sign in page to log in.</div>}

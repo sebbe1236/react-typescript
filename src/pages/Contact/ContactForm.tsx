@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Heading from "../../components/layout/Heading";
 import { BASE_URL } from "../../utils/api";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 type FormData = {
   title: string;
@@ -16,9 +18,9 @@ type dataPropsOnSubmit = {
 };
 
 function ContactForm() {
-  const [submit, setSubmit] = useState<boolean>(false);
+  const [submitting, setSubmit] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [successfulSubmit, setSuccessful] = useState<boolean>(false);
+  const [successfulSubmit, setSuccessfulMessage] = useState<boolean>(false);
 
   const url = BASE_URL + "contacts";
 
@@ -53,53 +55,54 @@ function ContactForm() {
       const response = await fetch(url, options);
       const result = await response.json();
       console.log(result);
-      setSuccessful(result);
+      setSuccessfulMessage(result);
       reset();
     } catch (error: any) {
       setError(error.toString());
+    } finally {
+      setSubmit(false);
     }
   };
 
   return (
     <>
       <Heading>Contact form</Heading>
-      <div>
-        <form className="form_container" onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <label>Title</label>
-            <input type="text" {...register("title", { required: true, minLength: 3 })} placeholder="Title" />
-            {errors.title && <div>Name must be over 3 letters</div>}
-          </div>
 
-          <div>
-            <label>Enter email address</label>
-            <input
-              type="text"
-              {...register("email", {
-                required: true,
-                pattern:
-                  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              })}
-              placeholder="email"
-            />
-            {errors.email && <div>Please enter a valid email address</div>}
-          </div>
+      <Form className="form_container" onSubmit={handleSubmit(onSubmit)}>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Label>Title</Form.Label>
+          <Form.Control type="text" placeholder="title" {...register("title", { required: true, minLength: 3 })} />
+          {errors.title && <div>Name must be over 3 letters</div>}
+        </Form.Group>
 
-          <div>
-            <label>Fill in your question below</label>
-            <textarea
-              {...register("description", { required: true, minLength: 20 })}
-              placeholder="description"
-            ></textarea>
-            {errors.description && <div>Subject must contain 20 letters or more</div>}
-          </div>
-          <button type="submit" className="submit_button p-3 m-3">
-            {submit ? "sending" : "submit"}
-          </button>
-        </form>
-        {error && <div>form couldn't`t be sent.</div>}
-        {successfulSubmit && <div>Your form has been sent. We will get back to you shortly. </div>}
-      </div>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="name@example.com"
+            {...register("email", {
+              required: true,
+              pattern:
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            })}
+          />
+          {errors.email && <div>Please enter a valid email address</div>}
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Label>Fill in your question below</Form.Label>
+          <Form.Control as="textarea" rows={5} {...register("description", { required: true, minLength: 20 })} />
+        </Form.Group>
+        {errors.description && <div>Subject must contain 20 letters or more</div>}
+
+        <div>
+          <Button type="submit">{submitting ? "Sending" : "Submit"}</Button>
+        </div>
+      </Form>
+      {successfulSubmit && (
+        <div className="p-3 h3 text-center">Your form has been sent. We will get back to you shortly. </div>
+      )}
+      {error && <div>form couldn't`t be sent.</div>}
     </>
   );
 }

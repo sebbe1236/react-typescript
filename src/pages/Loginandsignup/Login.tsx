@@ -18,8 +18,9 @@ type signInProps = {
 };
 
 function Login() {
-  const [submit, setSubmit] = useState(false);
+  const [submitting, setSubmit] = useState(false);
   const [error, setError] = useState(null);
+  const [success, setSuccessMessage] = useState(false);
 
   const url = BASE_URL + "auth/local";
 
@@ -42,7 +43,7 @@ function Login() {
         password: data.password,
       });
       setAuth(response.data.jwt);
-      console.log(response.data);
+      setSuccessMessage(response.data);
       reset();
     } catch (error: any) {
       setError(error.toString());
@@ -67,10 +68,10 @@ function Login() {
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          Submit
+          {submitting ? "Logging in" : "Log in"}
         </Button>
       </Form>
-      {submit && <div>You have been successfully logged in.</div>}
+      {success && <div>You have been successfully logged in.</div>}
       {error && <div>Something went wrong. Please contact customer support.</div>}
     </>
   );
