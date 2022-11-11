@@ -18,7 +18,6 @@ export function JacketFetch() {
   const [jackets, setJackets] = useState<Array[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  //const [cartItems, setCartItems] = useState([]);
 
   const url = BASE_URL + "jackets?populate=*";
 
@@ -45,12 +44,8 @@ export function JacketFetch() {
     return <p>Something went wrong</p>;
   }
 
-  // const onAdd = (product: any) => {
-
-  //   }
-  // };
-
-  // const onRemove = (product: any) => {};
+  // https://www.youtube.com/watch?v=7NqeSf1c-bw&list=LL&index=1&ab_channel=Weibenfalk
+  //kjøp det han kjører i app inni her med funksjonene for å legge til osv.
 
   return (
     <>
