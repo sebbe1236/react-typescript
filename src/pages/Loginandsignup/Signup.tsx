@@ -57,7 +57,7 @@ function Signup() {
       <Form className="form_container" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter username" {...register("username", { required: true })} />
+          <Form.Control type="text" placeholder="Enter a username" {...register("username", { required: true })} />
           {errors.username && <div>invalid username</div>}
         </Form.Group>
 
@@ -77,7 +77,7 @@ function Signup() {
         </Button>
       </Form>
       {success && <div>User created. Please go to the sign in page to log in.</div>}
-      {error && <div>Some error occured</div>}
+      {error && <div>Some error happened.</div>}
     </>
   );
 }
