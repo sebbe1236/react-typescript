@@ -1,10 +1,7 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
-
-import { BASE_URL } from "../../utils/api";
 import axios from "axios";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useCart } from "react-use-cart";
 
 interface Array {
