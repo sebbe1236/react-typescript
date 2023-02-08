@@ -1,5 +1,6 @@
 import "./sass/main.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
 import RootLayout from "./components/layout/RootLayout";

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useCart } from "react-use-cart";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Array {
   price: any;
@@ -47,6 +49,10 @@ export function ProductsFetch() {
     return <p>Something went wrong</p>;
   }
 
+  const notify = () => {
+    toast.success("ADDED");
+  };
+
   return (
     <>
       <h3 className="text-center">Products</h3>
@@ -57,9 +63,10 @@ export function ProductsFetch() {
               <Col key={product.id}>
                 <h4>{product.title}</h4>
                 <img src={product.image} className="w-50" />
-                <Button id={product.id} onClick={() => addItem(product)}>
+                <Button id={product.id} onClick={(() => addItem(product), notify)}>
                   Add to cart
                 </Button>
+                <ToastContainer />
               </Col>
             );
           })}

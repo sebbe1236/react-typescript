@@ -1,13 +1,17 @@
-import React from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface Data {
   title?: string;
   image?: HTMLImageElement;
   content?: any;
   id?: number;
 }
+
+const notify = () => {
+  toast.success("ADDED");
+};
 
 function ProductsData({ content }: Data) {
   return (
@@ -24,9 +28,10 @@ function ProductsData({ content }: Data) {
                   alt="test"
                 />
 
-                <Button className="p-3 m-3" id={product.id}>
+                <Button onClick={notify} className="p-3 m-3" id={product.id}>
                   Add to cart
                 </Button>
+                <ToastContainer />
               </Col>
             );
           })}

@@ -16,14 +16,16 @@ function Cart() {
       <Container>
         <Row sm={1} md={3} lg={6}>
           {items.map((item) => (
-            <li key={item.id}>
-              {item.quantity} x {item.name}&mdash;
-              <h3>{item.title}</h3>
-              <img src={item.image} className="w-50" alt="product image" />
-              <button onClick={() => updateItemQuantity(item.id, item.quantity - 1)}>Remove one</button>
-              <button onClick={() => updateItemQuantity(item.id, item.quantity + 1)}>Add one more</button>
-              <button onClick={() => removeItem(item.id)}>Remove from cart</button>
-            </li>
+            <>
+              <div key={item.id}>
+                Quantity:{item.quantity}
+                <h3>{item.title}</h3>
+                <img src={item.image} className="w-50" alt="product image" />
+                <button onClick={() => updateItemQuantity(item.id, item.quantity - 1)}>Remove one</button>
+                <button onClick={() => updateItemQuantity(item.id, item.quantity + 1)}>Add one more</button>
+                <button onClick={() => removeItem(item.id)}>Remove from cart</button>
+              </div>
+            </>
           ))}
         </Row>
       </Container>
