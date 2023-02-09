@@ -63,7 +63,7 @@ export function ProductsFetch() {
               <Col key={product.id}>
                 <h4>{product.title}</h4>
                 <img src={product.image} className="w-50" />
-                <Button id={product.id} onClick={(() => addItem(product), notify)}>
+                <Button id={product.id} onClick={() => addItem(product)}>
                   Add to cart
                 </Button>
                 <ToastContainer />
