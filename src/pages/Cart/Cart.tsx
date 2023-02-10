@@ -3,7 +3,7 @@ import React from "react";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useCart } from "react-use-cart";
-import { useAuth } from "../../components/context/Context";
+
 import Heading from "../../components/layout/Heading";
 
 function Cart() {

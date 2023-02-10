@@ -4,11 +4,13 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
+import { useCart } from "react-use-cart";
 import Context, { useAuth } from "../context/Context";
 import { useNavigate } from "react-router-dom";
 
 function NavBar() {
   const [auth, setAuth] = useAuth();
+  const { totalUniqueItems } = useCart();
 
   const navigate = useNavigate();
 
@@ -72,7 +74,7 @@ function NavBar() {
                   transform: "translate(25%,25%)",
                 }}
               >
-                1
+                {totalUniqueItems}
               </div>
             </Button>
           </Nav.Link>
