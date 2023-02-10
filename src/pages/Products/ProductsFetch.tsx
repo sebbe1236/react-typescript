@@ -5,6 +5,8 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { useCart } from "react-use-cart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 interface Array {
   price: any;
@@ -22,6 +24,7 @@ export function ProductsFetch() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   const { addItem } = useCart();
 
   const url = "https://fakestoreapi.com/products";
@@ -66,7 +69,6 @@ export function ProductsFetch() {
                 <Button id={product.id} onClick={() => addItem(product)}>
                   Add to cart
                 </Button>
-                <ToastContainer />
               </Col>
             );
           })}

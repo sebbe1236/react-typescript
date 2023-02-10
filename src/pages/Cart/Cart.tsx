@@ -7,7 +7,7 @@ import { useAuth } from "../../components/context/Context";
 import Heading from "../../components/layout/Heading";
 
 function Cart() {
-  const { isEmpty, totalUniqueItems, items, updateItemQuantity, removeItem } = useCart();
+  const { cartTotal, isEmpty, totalUniqueItems, items, updateItemQuantity, removeItem } = useCart();
 
   //https://stackoverflow.com/questions/71775787/i-would-like-to-pop-up-confirmation-message-before-deleting-the-data-react-and-d for å legge til slett message.
 
@@ -15,10 +15,10 @@ function Cart() {
   return (
     <>
       <Heading className="text-center">Basket</Heading>
-      <h1>({totalUniqueItems})</h1>
+      <h1>Items in cart:{totalUniqueItems}</h1>
 
       <Container>
-        <Row sm={1} md={3} lg={6}>
+        <Row sm={1} md={2} lg={6}>
           {items.map((item) => (
             <Col key={item.title}>
               <h3>{item.title}</h3>
@@ -41,6 +41,9 @@ function Cart() {
           ))}
         </Row>
       </Container>
+      <div className="text-center">
+        <h4> Cart total: ${cartTotal}</h4>
+      </div>
     </>
   );
 }
